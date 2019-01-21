@@ -7,9 +7,10 @@ Add to your WORKSPACE
 ```
 http_archive(
     name = "com_github_cschuet_zstd",
-    strip_prefix = "zstd-776a2d7385a8086324247df705c6f988f05c9c43",
+    strip_prefix = "zstd-190d2b37467a96b5935c41edcb07097ea131c3a6",
+    sha256 = "b10a78e419bfb2a20754b8f685263b98d0179ab9fd6bbfd522979405a1e80191",
     urls = [
-        "https://github.com/cschuet/zstd/archive/776a2d7385a8086324247df705c6f988f05c9c43.tar.gz",
+        "https://github.com/cschuet/zstd/archive/190d2b37467a96b5935c41edcb07097ea131c3a6.tar.gz",
     ],
 )
 
