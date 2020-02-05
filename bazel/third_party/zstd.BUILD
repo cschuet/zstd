@@ -13,6 +13,9 @@ cc_library(
 
 cc_library(
     name = "zdict",
+    copts = [
+        "-DXXH_NAMESPACE=ZSTD_",
+    ],
     hdrs = [
         "lib/dictBuilder/zdict.h",
         "lib/dictBuilder/divsufsort.h",
@@ -70,10 +73,16 @@ cc_library(
     hdrs = glob(["lib/legacy/*.h"]),
     srcs = glob(["lib/legacy/*.c"]),
     deps = [":common"],
-    copts = ["-DZSTD_LEGACY_SUPPORT=4"],
+    copts = [
+        "-DZSTD_LEGACY_SUPPORT=4",
+        "-DXXH_NAMESPACE=ZSTD_",
+    ],
 )
 
 cc_library(
+    copts = [
+        "-DXXH_NAMESPACE=ZSTD_",
+    ],
     name = "decompress",
     hdrs = glob([("lib/decompress/*_impl.h")]),
     srcs = glob(["lib/decompress/zstd*.c"]) + [
@@ -97,6 +106,9 @@ cc_library(
 
 cc_library(
     name = "compress",
+    copts = [
+        "-DXXH_NAMESPACE=ZSTD_",
+    ],
     hdrs = [
         "lib/compress/zstd_compress_internal.h",
         "lib/compress/zstd_double_fast.h",
@@ -105,8 +117,13 @@ cc_library(
         "lib/compress/zstd_ldm.h",
         "lib/compress/zstdmt_compress.h",
         "lib/compress/zstd_opt.h",
+        "lib/compress/zstd_cwksp.h",
+        "lib/compress/zstd_compress_sequences.h",
+        "lib/compress/zstd_compress_literals.h",
     ],
     srcs = [
+        "lib/compress/zstd_compress_sequences.c",
+        "lib/compress/zstd_compress_literals.c",
         "lib/compress/zstd_compress.c",
         "lib/compress/zstd_double_fast.c",
         "lib/compress/zstd_fast.c",
@@ -131,6 +148,7 @@ cc_library(
     srcs = ["lib/common/threading.c"],
     linkopts = ["-pthread"],
     copts = ["-DZSTD_MULTITHREAD"],
+    deps = [":debug"],
 )
 
 cc_library(
@@ -263,6 +281,7 @@ cc_library(
         "-DZSTD_LZMADECOMPRES",
         "-DZSTD_LZ4COMPRESS",
         "-DZSTD_LZ4DECOMPRES",
+        "-DXXH_NAMESPACE=ZSTD_",
     ],
     linkopts = [
         "-lz",
